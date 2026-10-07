@@ -1,16 +1,32 @@
-SET SERVEROUTPUT ON;
+CREATE OR REPLACE PROCEDURE INSERT_STUDENT
+(
+    StudentID NUMBER,
+    StudentName VARCHAR2,
+    DOB DATE,
+    Gender VARCHAR2,
+    DepartmentID NUMBER
+)
+AS
+BEGIN
+    INSERT INTO Student
+    (
+        StudentID,
+        StudentName,
+        DOB,
+        Gender,
+        DepartmentID
+    )
+    VALUES
+    (
+        StudentID,
+        StudentName,
+        DOB,
+        Gender,
+        DepartmentID
+    );
 
--- Student table
-CREATE TABLE Student (
-    StudentID NUMBER(5) PRIMARY KEY,
-    StudentName VARCHAR2(50),
-    DepartmentID NUMBER(5)
-);
+    COMMIT;
 
--- Write a PL/SQL function named COUNT_STUDENTS
--- to count the number of students in a particular department.
---
--- The function should:
--- 1. Accept DepartmentID as an input parameter.
--- 2. Return the number of students belonging to that department.
--- 3. Use COUNT(*) to calculate the number of students.
+    DBMS_OUTPUT.PUT_LINE('Student record inserted successfully');
+END INSERT_STUDENT;
+/
