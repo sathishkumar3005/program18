@@ -1,32 +1,15 @@
-CREATE OR REPLACE PROCEDURE INSERT_STUDENT
-(
-    StudentID NUMBER,
-    StudentName VARCHAR2,
-    DOB DATE,
-    Gender VARCHAR2,
-    DepartmentID NUMBER
+CREATE OR REPLACE FUNCTION count_students (
+    p_departmentid IN NUMBER
 )
-AS
+RETURN NUMBER
+IS
+    v_count NUMBER;
 BEGIN
-    INSERT INTO Student
-    (
-        StudentID,
-        StudentName,
-        DOB,
-        Gender,
-        DepartmentID
-    )
-    VALUES
-    (
-        StudentID,
-        StudentName,
-        DOB,
-        Gender,
-        DepartmentID
-    );
+    SELECT COUNT(*)
+    INTO v_count
+    FROM Student
+    WHERE DepartmentID = p_departmentid;
 
-    COMMIT;
-
-    DBMS_OUTPUT.PUT_LINE('Student record inserted successfully');
-END INSERT_STUDENT;
+    RETURN v_count;
+END;
 /
